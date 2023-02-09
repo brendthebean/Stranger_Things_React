@@ -4,7 +4,7 @@ const RenderPosts = (props) => {
 
     return (
         <>
-        {props.userPosts.map((post) => {
+        {props.userPosts.map((post, index) => {
             return <div id="singlePost" key={post.id}>
                 <h2>{post.title}</h2>
                 <span>
