@@ -1,11 +1,11 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 
-const registerNewUser = () => {
+const LogInPage = (props) => {
     let [userInfo, setUserInfo] = useState({
         username: "",
         password: ""
     })
-   
+
     const handleChange = (event) => {
         event.preventDefault();
         let value = event.target.value;
@@ -17,16 +17,16 @@ const registerNewUser = () => {
                 [name]: value
             }
         })
-   }
+    }
 
-   const postNewUser = async (event) => {
+    const logUserIn = async (event) => {
         event.preventDefault();
-        console.log(`registered username: ${userInfo.username} registered password: ${userInfo.password}`);
+        console.log(`log in username: ${userInfo.username} log in password: ${userInfo.password}`);
         try{
-                const response = await fetch ('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/register', {
-                method: "POST",
+            const response = await fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/login',{
+                method: 'POST',
                 headers: {
-                    'Content-Type' : 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     user: {
@@ -35,21 +35,24 @@ const registerNewUser = () => {
                     }
                 }),
             });
-            const result = await response.json();
-            if(result.error) {
+            const result = await response.json();            
+            if(result.error){
                 throw result.error;
             }
-            console.log('POST result: ', result);
-        }catch (err) {
+            console.log('login result: ', result);
+            props.setUserToken(result.data.token);
+            props.setIsLoggedIn(true);
+        }catch(err) {
             console.error(err);
         }
+      
+    }
 
-   }
-    
-    return<>
-        <h3>Create New User</h3>
+
+    return <>
+        <h3>Log In</h3>
         <form 
-        className="registerForm"
+        className="logInForm"
         >        
             <label>
                 Username:
@@ -69,9 +72,9 @@ const registerNewUser = () => {
                     name="password"                  
                 ></input>
             </label>
-            <button onClick={postNewUser}>Click here to register</button>             
+            <button onClick={logUserIn}>Click here to Log in</button>             
         </form>
     </>
 }
 
-export default registerNewUser;
+export default LogInPage;
