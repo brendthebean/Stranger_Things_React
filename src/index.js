@@ -34,14 +34,15 @@ const App = () => {
             path ={path}
         />        
         <RenderPosts
-            isLoggedIn= {isLoggedIn} 
-            userPosts={userPosts}
-            currentUsername={currentUsername}
+            isLoggedIn = {isLoggedIn}
+            userToken = {userToken} 
+            userPosts = {userPosts}
+            currentUsername = {currentUsername}
         />  
         <RegisterNewUser />
         <LogInPage 
-            isLoggedIn={isLoggedIn} 
-            setIsLoggedIn={setIsLoggedIn} 
+            isLoggedIn = {isLoggedIn} 
+            setIsLoggedIn = {setIsLoggedIn} 
             userToken = {userToken}
             setUserToken = {setUserToken}
             currentUsername = {currentUsername}
