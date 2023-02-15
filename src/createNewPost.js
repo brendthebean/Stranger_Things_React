@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 
-const CreateNewPost = () => {
+const CreateNewPost = (props) => {
     let [postInfo, setPostInfo] = useState({
         title: "",
         description: "",
@@ -18,8 +18,36 @@ const CreateNewPost = () => {
                 ...prevalue,
                 [name]: value
             }
-        })
-        console.log(postInfo);
+        })       
+   }
+
+   const submitNewPost = async (event) =>{
+        event.preventDefault();
+        try{ 
+            const response = await fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/posts', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${props.userToken}`
+                },
+                body: JSON.stringify({
+                   post: {
+                    title: postInfo.title,
+                    description: postInfo.description,
+                    location: postInfo.location,
+                    price: postInfo.price,
+                    willDeliver: true
+                   }
+                })
+            });
+            const result = await response.json();
+            if(result.error){
+                throw result.error;
+            }
+            console.log(`create post result: ${result}`)
+        }catch(err){
+            console.error(err);
+        }
    }
 
     return <>
@@ -61,6 +89,7 @@ const CreateNewPost = () => {
                 onChange={handleChange}
                 name="location"></input>
             </label>
+            <button onClick={submitNewPost}>Create Post!</button>
         </form>
     </>
 }

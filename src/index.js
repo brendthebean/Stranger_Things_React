@@ -35,7 +35,7 @@ const App = () => {
             userToken = {userToken}
             setUserToken = {setUserToken}
         /> 
-        <CreateNewPost />    
+        <CreateNewPost userToken={userToken}/>    
     </>
 }
 
