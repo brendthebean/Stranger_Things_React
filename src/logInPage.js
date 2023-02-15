@@ -22,6 +22,7 @@ const LogInPage = (props) => {
     const logUserIn = async (event) => {
         event.preventDefault();
         console.log(`log in username: ${userInfo.username} log in password: ${userInfo.password}`);
+        props.setCurrentUsername(userInfo.username);
         try{
             const response = await fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/login',{
                 method: 'POST',

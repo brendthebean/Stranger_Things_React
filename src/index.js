@@ -12,9 +12,11 @@ const root = createRoot(appElement);
 
 
 const App = () => {
+    const[path, setPath] = useState('/');
     const[userPosts, setUserPosts] = useState([]);
     const[isLoggedIn, setIsLoggedIn] = useState(false);
     const[userToken, setUserToken] = useState("");
+    const[currentUsername, setCurrentUsername] = useState("");
 
 
     useEffect(() => {
@@ -26,14 +28,24 @@ const App = () => {
         fetchPosts();
     }, [])
     
-    return <>        
-        <RenderPosts userPosts={userPosts}/>  
-        <RegisterNewUser />'
+    return <>
+        <Header 
+            isLoggedIn={isLoggedIn} 
+            path ={path}
+        />        
+        <RenderPosts
+            isLoggedIn= {isLoggedIn} 
+            userPosts={userPosts}
+            currentUsername={currentUsername}
+        />  
+        <RegisterNewUser />
         <LogInPage 
             isLoggedIn={isLoggedIn} 
             setIsLoggedIn={setIsLoggedIn} 
             userToken = {userToken}
             setUserToken = {setUserToken}
+            currentUsername = {currentUsername}
+            setCurrentUsername = {setCurrentUsername}
         /> 
         <CreateNewPost userToken={userToken}/>    
     </>
