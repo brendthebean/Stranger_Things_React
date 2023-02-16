@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route, Link, useNavigate } from 'react-router-dom';
 
 const LogInPage = (props) => {
+    const navigate = useNavigate();
     let [userInfo, setUserInfo] = useState({
         username: "",
         password: ""
@@ -43,6 +45,7 @@ const LogInPage = (props) => {
             console.log('login result: ', result);
             props.setUserToken(result.data.token);
             props.setIsLoggedIn(true);
+            navigate("/home");
         }catch(err) {
             console.error(err);
         }
