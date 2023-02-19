@@ -6,6 +6,7 @@ import RegisterNewUser from './registerNewUser.js';
 import LogInPage from "./logInPage";
 import CreateNewPost from "./createNewPost";
 import Header from "./header.js";
+import Messages from "./messages";
 
 const appElement = document.getElementById("root");
 
@@ -34,23 +35,33 @@ const App = () => {
         <BrowserRouter>
             <div id="app">
                 <Routes>
-                    <Route exact path="" element={
+                    <Route exact path="/" element={
                         <div id="homepage">
                             <Header 
                                 isLoggedIn={isLoggedIn}
-                                path={path}
-                                setPath={setPath} 
+                                setIsLoggedIn={setIsLoggedIn}
+                                setCurrentUsername={setCurrentUsername}
                             />
                             <RenderPosts
                                 isLoggedIn = {isLoggedIn}
                                 userToken = {userToken} 
                                 userPosts = {userPosts}
                                 currentUsername = {currentUsername}
-                            />  
-                            <RegisterNewUser />
+                            />
+                            {isLoggedIn === false ?
+                            <RegisterNewUser />                  :
+                            <CreateNewPost userToken={userToken}/>   
+                            }  
+                            
                         </div>
                     }></Route>
                     <Route exact path="/login" element={
+                        <>
+                            <Header 
+                            isLoggedIn={isLoggedIn}
+                            setIsLoggedIn={setIsLoggedIn}
+                            setCurrentUsername={setCurrentUsername}
+                            />
                            <LogInPage 
                            isLoggedIn = {isLoggedIn} 
                            setIsLoggedIn = {setIsLoggedIn} 
@@ -60,16 +71,24 @@ const App = () => {
                            setCurrentUsername = {setCurrentUsername}
                            path={path}
                            setPath={setPath} 
-                       />
+                            />
+                       </>
                     }></Route>
                     <Route exact path="/messages" element={
-                        <Messages 
-                            userToken = {userToken}
-                        />
+                        <>
+                            <Header 
+                            isLoggedIn={isLoggedIn}
+                            setIsLoggedIn={setIsLoggedIn}
+                            setCurrentUsername={setCurrentUsername}
+                            />
+                            <Messages 
+                                userToken = {userToken}
+                            />
+                        </>
                     }>
                     </Route>
                 </Routes> 
-                <CreateNewPost userToken={userToken}/>    
+                 
             </div>
         </BrowserRouter>
     )

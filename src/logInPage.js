@@ -45,7 +45,7 @@ const LogInPage = (props) => {
             console.log('login result: ', result);
             props.setUserToken(result.data.token);
             props.setIsLoggedIn(true);
-            navigate("/home");
+            navigate("/");
         }catch(err) {
             console.error(err);
         }

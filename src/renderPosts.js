@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const RenderPosts = (props) => {
-    const[postToDelete, setPostToDelete] = useState("");
 
     const deletePost = async (event) => {
         event.preventDefault();
