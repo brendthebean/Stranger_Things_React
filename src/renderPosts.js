@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 const RenderPosts = (props) => {
+    const [userMessage, setUserMessage] = useState({
+        message: ""
+    });
 
+    //deletes posts that user made
     const deletePost = async (event) => {
         event.preventDefault();
         console.log(event.target.name);
@@ -23,6 +27,46 @@ const RenderPosts = (props) => {
         }
     }
 
+    const sendUserMessage = async (event) => {
+        event.preventDefault();
+        console.log(event.target.name);
+        try{
+            const response = await fetch (`https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/posts/${event.target.name}/messages`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${props.userToken}`
+                },
+                body: JSON.stringify({
+                    message: {
+                        content: userMessage.message
+                    }
+                }),
+            });
+            const result = await response.json();
+            if(result.error){
+                throw result.error;
+            }
+            console.log('message result', result);
+        }catch(err) {
+            console.error(err);
+        }
+    }
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        let value = event.target.value;
+        let name = event.target.name;
+
+        setUserMessage((prevalue) => {
+            return {
+                ...prevalue,
+                [name]: value
+            }
+        })
+        console.log(userMessage);
+    }
+
     return (       
         <>
             {
@@ -37,8 +81,16 @@ const RenderPosts = (props) => {
                         </span>
                         {
                          props.currentUsername === post.author.username ?
-                         <button onClick={deletePost} id={index} name={post._id}>delete</button> :   
-                         <button>message</button>                   
+                         <button onClick={deletePost()} id={index} name={post._id}>delete</button> :   
+                         <form>
+                            <input
+                                type="text"
+                                placeholder="what would you like to say?"
+                                onChange={handleChange}
+                                name="message"
+                            ></input>
+                            <button onClick={sendUserMessage} name={post._id}>send message</button>
+                        </form>                   
                         }
                     </div>
                 })    :
