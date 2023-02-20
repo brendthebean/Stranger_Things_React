@@ -53,7 +53,7 @@ const CreateNewPost = (props) => {
     return <>
     <h3>Create New Post</h3>
         <form
-        className="newPostForm"
+        className="Form"
         >
             <label>
                 Title:
@@ -89,7 +89,7 @@ const CreateNewPost = (props) => {
                 onChange={handleChange}
                 name="location"></input>
             </label>
-            <button onClick={submitNewPost}>Create Post!</button>
+            <button class="button" onClick={submitNewPost}>Create Post!</button>
         </form>
     </>
 }

@@ -15,7 +15,6 @@ const Messages = (props) => {
             if(result.error){
                 throw result.error;
             }
-            console.log('login messages: ', result);
             setMessages(result.data.messages);
         }catch(err) {
             console.error(err);

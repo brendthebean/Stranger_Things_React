@@ -55,9 +55,7 @@ const LogInPage = (props) => {
 
     return <>
         <h3>Log In</h3>
-        <form 
-        className="logInForm"
-        >        
+        <form className="Form">        
             <label>
                 Username:
                 <input 
@@ -76,7 +74,7 @@ const LogInPage = (props) => {
                     name="password"                  
                 ></input>
             </label>
-            <button onClick={logUserIn}>Click here to Log in</button>             
+            <button class="button" onClick={logUserIn}>Click here to Log in</button>             
         </form>
     </>
 }

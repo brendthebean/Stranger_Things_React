@@ -42,21 +42,21 @@ const App = () => {
                                 setIsLoggedIn={setIsLoggedIn}
                                 setCurrentUsername={setCurrentUsername}
                             />
+                               {isLoggedIn === false ?
+                            <RegisterNewUser />                  :
+                            <CreateNewPost userToken={userToken}/>   
+                            }
+                            <h2>Posts</h2>                              
                             <RenderPosts
                                 isLoggedIn = {isLoggedIn}
                                 userToken = {userToken} 
                                 userPosts = {userPosts}
                                 currentUsername = {currentUsername}
-                            />
-                            {isLoggedIn === false ?
-                            <RegisterNewUser />                  :
-                            <CreateNewPost userToken={userToken}/>   
-                            }  
-                            
+                            />                         
                         </div>
                     }></Route>
                     <Route exact path="/login" element={
-                        <>
+                        <div class="homepage">
                             <Header 
                             isLoggedIn={isLoggedIn}
                             setIsLoggedIn={setIsLoggedIn}
@@ -72,10 +72,10 @@ const App = () => {
                            path={path}
                            setPath={setPath} 
                             />
-                       </>
+                       </div>
                     }></Route>
                     <Route exact path="/messages" element={
-                        <>
+                        <div class="homepage">
                             <Header 
                             isLoggedIn={isLoggedIn}
                             setIsLoggedIn={setIsLoggedIn}
@@ -84,7 +84,7 @@ const App = () => {
                             <Messages 
                                 userToken = {userToken}
                             />
-                        </>
+                        </div>
                     }>
                     </Route>
                 </Routes> 

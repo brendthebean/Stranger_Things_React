@@ -8,7 +8,6 @@ const RenderPosts = (props) => {
     //deletes posts that user made
     const deletePost = async (event) => {
         event.preventDefault();
-        console.log(event.target.name);
         try{
             const response = await fetch (`https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/posts/${event.target.name}`, {
                 method: "DELETE",
@@ -29,7 +28,6 @@ const RenderPosts = (props) => {
 
     const sendUserMessage = async (event) => {
         event.preventDefault();
-        console.log(event.target.name);
         try{
             const response = await fetch (`https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/posts/${event.target.name}/messages`, {
                 method: "POST",
@@ -47,7 +45,6 @@ const RenderPosts = (props) => {
             if(result.error){
                 throw result.error;
             }
-            console.log('message result', result);
         }catch(err) {
             console.error(err);
         }
@@ -64,7 +61,6 @@ const RenderPosts = (props) => {
                 [name]: value
             }
         })
-        console.log(userMessage);
     }
 
     return (       
@@ -89,7 +85,7 @@ const RenderPosts = (props) => {
                                 onChange={handleChange}
                                 name="message"
                             ></input>
-                            <button onClick={sendUserMessage} name={post._id}>send message</button>
+                            <button class="button" onClick={sendUserMessage} name={post._id}>send message</button>
                         </form>                   
                         }
                     </div>

@@ -49,7 +49,7 @@ const registerNewUser = () => {
     return<>
         <h3>Create New User</h3>
         <form 
-        className="registerForm"
+        className="Form"
         >        
             <label>
                 Username:
@@ -69,7 +69,7 @@ const registerNewUser = () => {
                     name="password"                  
                 ></input>
             </label>
-            <button onClick={postNewUser}>Click here to register</button>             
+            <button class = "button" id="registerButton" onClick={postNewUser}>Click here to register</button>             
         </form>
     </>
 }
